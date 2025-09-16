@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A romantic birthday surprise intro page for Amanat">
+  <title>Happy Birthday My litte Puchi 🎂❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0f0c29;
+      --bg-2: #302b63;
+      --bg-3: #24243e;
+      --primary: #ff6b9a;
+      --primary-strong: #ff2d6f;
+      --text: #ffffff;
+      --muted: #d8d8e3;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      overflow: hidden;
+    }
+
+    .gradient-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(255, 107, 154, 0.25), transparent 60%),
+                  radial-gradient(900px 600px at -10% 110%, rgba(255, 184, 108, 0.18), transparent 60%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      position: relative;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      isolation: isolate;
+    }
+
+    .card {
+      position: relative;
+      max-width: 920px;
+      width: 100%;
+      padding: 56px 32px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.08);
+      overflow: hidden;
+      transform: translateY(12px);
+      opacity: 0;
+      animation: riseIn 900ms cubic-bezier(.2,.65,.28,1) 120ms forwards;
+    }
+
+    @keyframes riseIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .sparkle {
+      position: absolute;
+      inset: -2px;
+      background: conic-gradient(from 180deg at 50% 50%,
+        rgba(255, 255, 255, 0.15), rgba(255, 107, 154, 0.35), rgba(255, 255, 255, 0.15));
+      filter: blur(22px);
+      opacity: 0.35;
+      pointer-events: none;
+      mask: radial-gradient(closest-side, rgba(0,0,0,0.8), transparent);
+      animation: rotate 14s linear infinite;
+    }
+
+    @keyframes rotate { to { transform: rotate(360deg); } }
+
+    h1 {
+      margin: 0 0 12px 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 72px);
+      letter-spacing: 0.5px;
+      line-height: 1.08;
+      text-shadow: 0 6px 24px rgba(255, 45, 111, 0.35);
+    }
+
+    .subtitle {
+      margin: 0 auto 28px;
+      max-width: 760px;
+      color: var(--muted);
+      font-weight: 300;
+      font-size: clamp(16px, 2.4vw, 20px);
+      line-height: 1.7;
+    }
+
+    .heart-row {
+      display: inline-flex;
+      gap: 10px;
+      margin: 14px 0 26px;
+      transform: translateY(6px);
+      opacity: 0;
+      animation: fadeSlide 700ms ease-out 400ms forwards;
+    }
+
+    @keyframes fadeSlide {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .heart {
+      width: 14px;
+      height: 14px;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      position: relative;
+      filter: drop-shadow(0 6px 10px rgba(255, 45, 111, 0.35));
+      animation: float 3.5s ease-in-out infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before { left: -7px; }
+    .heart::after { top: -7px; }
+
+    .heart:nth-child(2) { animation-delay: .2s; }
+    .heart:nth-child(3) { animation-delay: .4s; }
+    .heart:nth-child(4) { animation-delay: .6s; }
+    .heart:nth-child(5) { animation-delay: .8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(45deg); }
+      50% { transform: translateY(-8px) rotate(45deg); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      transition: transform .15s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.38); }
+    .btn:active { transform: translateY(0); }
+
+    .btn .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      box-shadow: 0 0 0 6px rgba(255, 45, 111, 0.18), 0 8px 18px rgba(255, 45, 111, 0.36);
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+    }
+
+    /* Floating background hearts */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bg-hearts span {
+      position: absolute;
+      display: block;
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, rgba(255,107,154,0.8), rgba(255,45,111,0.9));
+      transform: rotate(45deg);
+      border-radius: 2px;
+      filter: blur(0.2px);
+      animation: rise var(--dur) linear infinite;
+      opacity: .55;
+    }
+
+    .bg-hearts span::before, .bg-hearts span::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .bg-hearts span::before { left: -6px; }
+    .bg-hearts span::after { top: -6px; }
+
+    @keyframes rise {
+      0% { transform: translateY(0) rotate(45deg); }
+      100% { transform: translateY(-120vh) rotate(45deg); }
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 40px 22px; border-radius: 20px; }
+      .subtitle { font-size: 16px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-overlay"></div>
+  <div class="bg-hearts" aria-hidden="true" id="bgHearts"></div>
+
+  <main class="container">
+    <section class="card" id="introCard">
+      <div class="sparkle" aria-hidden="true"></div>
+      <h1>Happy Birthday, Amanat ✨</h1>
+      <p class="subtitle">
+        Today is all about you. This is just the beginning of a little surprise
+        made with lots of love. Ready to step inside?
+      </p>
+      <div class="heart-row" aria-hidden="true">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+      </div>
+      <button class="btn" id="enterBtn" type="button" aria-label="Enter the surprise">
+        <span class="dot" aria-hidden="true"></span>
+        Enter
+      </button>
+      <div class="footer-note">Crafted with love by Abhinav Gomra ❤️</div>
+    </section>
+  </main>
+
+  <script>
+    // Generate floating background hearts with varied sizes/speeds/positions
+    (function generateBackgroundHearts() {
+      const root = document.getElementById('bgHearts');
+      const count = 24; // keep it light for performance
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('span');
+        const size = 8 + Math.random() * 14; // 8-22px
+        const left = Math.random() * vw;
+        const delay = Math.random() * 6; // 0-6s
+        const duration = 12 + Math.random() * 12; // 12-24s
+        s.style.left = left + 'px';
+        s.style.bottom = (-10 - Math.random() * 20) + 'px';
+        s.style.width = size + 'px';
+        s.style.height = size + 'px';
+        s.style.animationDelay = delay + 's';
+        s.style.setProperty('--dur', duration + 's');
+        s.style.opacity = (0.35 + Math.random() * 0.35).toFixed(2);
+        root.appendChild(s);
+      }
+    })();
+
+    // Enter button: subtle click feedback, fade out, then navigate
+    (function setupEnter() {
+      const btn = document.getElementById('enterBtn');
+      const card = document.getElementById('introCard');
+      btn.addEventListener('click', () => {
+        // store a tiny flag for later pages if needed
+        try { localStorage.setItem('amanat:introSeen', 'true'); } catch (e) {}
+        card.style.transition = 'opacity .5s ease, transform .5s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(12px)';
+        setTimeout(() => {
+          // Navigate to the next page (to be created)
+          window.location.href = 'beating-heart.html';
+        }, 520);
+      });
+    })();
+  </script>
+</body>
+</html>

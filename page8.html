@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffcccb;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+        }
+        .playlist {
+            margin-top: 20px;
+        }
+        /* Centered overlay CTA after delay */
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); display: grid; place-items: center; z-index: 100; opacity: 0; pointer-events: none; transition: opacity .45s ease; }
+        .overlay.show { opacity: 1; pointer-events: auto; }
+        .modal { background: linear-gradient(135deg,#ffffff,#fff0f6); border: 1px solid rgba(255,255,255,.6); border-radius: 18px; width: min(92vw, 520px); padding: 28px 24px; box-shadow: 0 24px 80px rgba(214,51,132,.35); text-align: center; transform: translateY(18px) scale(.98); opacity: 0; transition: transform .45s ease .06s, opacity .45s ease .06s; }
+        .overlay.show .modal { transform: translateY(0) scale(1); opacity: 1; }
+        .modal h3 { margin: 0 0 8px; color: #d63384; }
+        .modal p { margin: 0 0 18px; color: #444; }
+        .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; text-decoration: none; font-weight: 800; color: #111; background: linear-gradient(135deg,#ffe6f0,#ffffff); box-shadow: 0 12px 36px rgba(214,51,132,.35); position: relative; overflow: hidden; }
+        .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 44px rgba(214,51,132,.4); }
+        .cta-btn:active { transform: translateY(0); box-shadow: 0 10px 28px rgba(214,51,132,.34); }
+        .shine { position: absolute; inset: -60%; background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,77,109,.4), transparent 40%); pointer-events: none; }
+        .cta-arrow { width: 18px; height: 18px; border: 2px solid #111; border-left: 0; border-top: 0; transform: rotate(-45deg); }
+        @media (prefers-reduced-motion: reduce){ .overlay, .modal { transition: none } .cta-btn:hover, .cta-btn:active { transform:none } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>For My Love ❤️</h1>
+        <img src="first and last photo .jpg" alt="Our Beautiful Memory">
+        
+        <div class="message">
+            <p>My love, you are the most precious part of my life. You bring joy, love, and happiness into my world every single day. Thank you for being YOU. ❤️</p>
+        </div>
+
+        <h2>Special Moments 📸</h2>
+        <img src="ChatGPT Image Mar 29, 2025, 03_40_32 PM.png" alt="Memory 1">
+        <h3>Only Some but Still make me  love you day by day</h3>
+        <img src="as.png" alt="love you">
+        
+
+        <h2>Our Love Playlist 🎶</h2>
+        <div class="playlist">
+            <p><a href="https://www.youtube.com/watch?v=hVCYwwFwGEE" target="_blank">🎵 Song 1</a></p>
+            <p><a href="https://www.youtube.com/watch?v=4h1WFyOQv0Y" target="_blank">🎵 Song 2</a></p>
+        </div>
+
+        <h2>A Special Message for You 💌</h2>
+        <p>Every single moment with you is like a dream come true. I love you more than words can express. Always and forever. ❤️</p>
+    </div>
+
+    <!-- Centered overlay CTA after 5 seconds -->
+    <div class="overlay" id="ctaOverlay" aria-hidden="true">
+        <div class="modal">
+            <h3>Ready for the next surprise?</h3>
+            <p>There’s a little journey waiting for you.</p>
+            <a class="cta-btn" href="page9.html" id="ctaBtn" aria-label="Lets take you to outer scace let's escape the reality">
+                <span>Lets you too space</span>
+                <span class="cta-arrow"></span>
+                <span class="shine"></span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            var overlay = document.getElementById('ctaOverlay');
+            var btn = document.getElementById('ctaBtn');
+
+            // Show overlay after 12 seconds
+            setTimeout(function(){
+                overlay.classList.add('show');
+                overlay.setAttribute('aria-hidden','false');
+            }, 12000);
+
+            // Pointer glow on button
+            btn.addEventListener('pointermove', function(e){
+                var rect = btn.getBoundingClientRect();
+                var x = ((e.clientX - rect.left) / rect.width) * 100;
+                var y = ((e.clientY - rect.top) / rect.height) * 100;
+                btn.style.setProperty('--x', x + '%');
+                btn.style.setProperty('--y', y + '%');
+            });
+        })();
+    </script>
+
+</body>
+</html>

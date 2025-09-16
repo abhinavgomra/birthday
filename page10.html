@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>A Trip Down Memory Lane</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Pacifico&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Basic setup for the page */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            /* A new serif font for the body text */
+            font-family: 'Lora', serif;
+            /* A beautiful, soft linear gradient for the background */
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            overflow: hidden;
+        }
+
+        /* This main-content div will center everything */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        /* The container for the text, giving it a 'card' look */
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Semi-transparent white */
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
+            /* A cool blur effect for supported browsers */
+            text-align: center;
+            max-width: 650px;
+        }
+
+        /* Styling the heading with the new handwritten font */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            /* A friendly, handwritten font */
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 0;
+            color: #d19a66;
+            /* A warm, soft orange/gold color */
+        }
+
+        /* Styling the paragraph text */
+        p {
+            font-size: 1.2rem;
+            color: #4a4e69;
+            /* A dark, muted navy for readability */
+            line-height: 1.7;
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Styling the button with a new look */
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #d19a66;
+            /* Matching the heading color */
+            color: #ffffff;
+            /* White text on the button */
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Lora', serif;
+            /* Consistent font */
+            border-radius: 8px;
+            /* Softer rectangle, not a pill */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* A subtle shadow and lift effect on hover */
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(209, 154, 102, 0.4);
+        }
+
+        /* --- NEW ANIMATIONS --- */
+
+        /* A simpler fade-in animation this time */
+        @keyframes reveal {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .reveal-1,
+        .reveal-2,
+        .reveal-3 {
+            opacity: 0;
+            /* Hidden by default */
+            animation: reveal 1.5s ease forwards;
+        }
+
+        .reveal-1 {
+            animation-delay: 0.5s;
+        }
+
+        .reveal-2 {
+            animation-delay: 1.5s;
+        }
+
+        .reveal-3 {
+            animation-delay: 2.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-content">
+        <div class="card">
+
+            <h1 class="reveal-1">My darling...</h1>
+
+            <p class="reveal-2">How's your little journey going on? Now Lets go for the second and one of the most beautiful things i haave ever done for you .</p>
+
+            <a href="page11.html" class="button reveal-3">
+                Let's go
+            </a>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

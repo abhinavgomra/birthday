@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Surprise for You</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Basic setup for the page */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            /* A nice, clean font for the paragraph */
+            background-color: #121212;
+            /* A very dark, almost black background */
+            color: #e0e0e0;
+            /* A soft white for the text */
+            overflow: hidden;
+            /* Hides scrollbars */
+        }
+
+        /* This container will center everything */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        /* Styling the main heading "So baby..." */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            /* A beautiful, elegant font */
+            font-size: 3.5rem;
+            /* rem is a good unit for font size */
+            font-weight: 500;
+            margin: 0;
+            color: #f2a9a2;
+            /* A soft, rosy color */
+        }
+
+        /* Styling the paragraph text */
+        p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            max-width: 600px;
+            /* Prevents the text from getting too wide on big screens */
+            line-height: 1.6;
+            margin-top: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Styling the button */
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f2a9a2;
+            /* Same rosy color as the heading */
+            color: #121212;
+            /* Dark text on the light button */
+            text-decoration: none;
+            /* Removes the ugly underline from the link */
+            font-weight: bold;
+            border-radius: 50px;
+            /* Makes the button a "pill" shape */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            /* Smooth transition for hover effect */
+        }
+
+        /* The button gets slightly bigger and lighter when you hover over it */
+        .button:hover {
+            transform: scale(1.05);
+            background-color: #f5c1bc;
+        }
+
+        /* --- ANIMATIONS --- */
+
+        /* The base animation: fades in and moves up slightly */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* We apply the animation to each element with a different delay, so they appear one by one */
+        .fade-in-1 {
+            opacity: 0;
+            /* Hidden by default */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .fade-in-2 {
+            opacity: 0;
+            /* Hidden by default */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1.5s;
+            /* Appears after the h1 */
+        }
+
+        .fade-in-3 {
+            opacity: 0;
+            /* Hidden by default */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 2.5s;
+            /* Appears last */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="fade-in-1">So baby...</h1>
+
+        <p class="fade-in-2">let me take you to the first website I made when I started learning to code.</p>
+
+        <a href="page5.html" class="button fade-in-3">
+            Click here to go back in time
+        </a>
+
+    </div>
+
+</body>
+
+</html>

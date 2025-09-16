@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A beautiful timeline of our love story and cherished memories together.">
+    <meta name="keywords" content="love story, timeline, memories, relationship">
+    <title>Our Beautiful Journey Together</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #45b7d1, #f093fb, #ff9a9e);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation-delay: 0.4s;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 45%;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -30px;
+            border-right-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -30px;
+            border-left-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+            animation: pulse 2s infinite;
+        }
+
+        .date {
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .timeline-content p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #f093fb);
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-style: italic;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 192, 203, 0.7);
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10%,
+            90% {
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-100vh) rotate(180deg);
+            }
+        }
+
+        .love-quote {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 4rem 0;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .love-quote h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .love-quote p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                margin-right: 0 !important;
+                padding: 1.5rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .timeline-content p {
+                font-size: 0.9rem;
+            }
+
+            .timeline-content::before {
+                left: -30px !important;
+                right: auto !important;
+                border-right-color: rgba(255, 255, 255, 0.95) !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .timeline-content {
+                padding: 1rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .timeline-content p {
+                font-size: 0.85rem;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 192, 203, 0.3), rgba(255, 105, 180, 0.3));
+            z-index: -1;
+        }
+
+        .footer-content p {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .next-page-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            animation: glow 2s infinite alternate;
+        }
+
+        .next-page-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floating-hearts" id="hearts"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Love Story</h1>
+            <p>Every moment with you is a beautiful memory</p>
+            <div style="font-size: 3rem; animation: pulse 2s infinite;">💕</div>
+        </div>
+    </section>
+
+    <div class="timeline-container">
+        <div class="love-quote">
+            <h2>Our Journey Together</h2>
+            <p>"Hello Madam ji, I wanted to make this website from a long time but didn't get time to make this website, but I will try to cover all our journey."</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">The Day We Met</div>
+                    <h3>First Encounter ✨</h3>
+                    <img src="pic1.jpg" />
+                    <p>So first day of Aakash we meet and it was starting of new Beginning , Who was knowing this cute
+                        innocent girls will meet this handsome boy
+                    <div class=""></div>
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">First Conversation</div>
+                    <h3>Getting to Know Each Other 💬</h3>
+                    <center><img src="pic2.jpg" alt="First Conversation" /></center>
+                    <p>Remember your first real conversation? When you came to me with Anshika, came sit in front of me and seat next to me, I didn't tell you I was happy to see you too. I know these photos are not from the first time we met, still let's recap.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">First Phone Call & Video Call</div>
+                    <h3>Hearing Your Voice 📞</h3>
+                    <center><img src="pic3.jpg" alt="First Phone Call & Video Call" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Let me tell you one thing: you are blessed with an awesome voice. It's so pretty when you hear it. I love your voice, and you know one thing? You may be speechless, but I love each and every word from your mouth.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">From just friends to Bestfriends</div>
+                    <h3>The Beginning of Forever 💫</h3>
+                    <center><img src="pic4.jpg" alt="From just friends to Bestfriends" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>I never thought we would even start talking, but we did. I don't even realize where it started, but it is going awesome. I love sharing things with you, even though you never spoke openly at first, but with time you also started. When you spoke, I decided I would help you move on, but never thought I would be the one to make you move on.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Silly movements</div>
+                    <h3>A Moment to Remember 💋</h3>
+                    <center><img src="pic5.jpg" alt="Silly movements" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>You used to send a lot of updates. I loved those updates, and we used to talk a lot, like full days, making fun, always having fun, happy with no tension. With time, feelings of love started coming.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">First "I Love You"</div>
+                    <h3>Three Words That Changed Everything 💕</h3>
+                    <center><img src="pic6.png" alt="First I Love You" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Who said it first? When and where did it happen? How did it feel to hear those words? I remember when I was behind Davinder, sitting behind on the bike, I proposed to you. It took 2 days to think, I was knowing the answer, but still, I feel so good.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">First Gift</div>
+                    <h3>First Flowers After Fight🌸</h3>
+                    <center><img src="pic7.jpg" alt="First Gift" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>The first gift I gave you was flowers. I still remember the way you smiled; you were so happy. You took such good care of them, keeping them alive longer than they could have, with so much love.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Meeting Her Friends</div>
+                    <h3>Becoming Part of Her World 👥</h3>
+                    <center><img src="pic9.jpg" alt="Meeting Her Friends" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>You know I miss that we used to sleep together, FaceTiming each other every day, seeing my baby girl so damn cute and just like a baby. I wanna sleep with you, hugging you and kissing you every day.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">She is my wife </div>
+                    <h3>Sometimes I look</h3>
+                    <center><img src="pic8.jpg" alt="She is my wife" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Sometimes I look at you and just go into deep thought that my GF looks so damn good that I wanna marry her soon as possible. It's not that I don't wanna, it's just I wanna do it soon.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Second Gift</div>
+                    <h3>Missing each other</h3>
+                    <center><img src="PIC10.jpg" alt="Second Gift" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Did you remember this gift? I remember you were missing me a lot and we couldn't meet each other, and you were angry with me, very angry. So to make your mood good, I sent you this, and your mood changed instantly, and you were happy after this.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Struggle </div>
+                    <h3>Going 1300 km for her </h3>
+                    <center><img src="pic11.jpg" alt="Struggle" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Every relationship has its moments. Going first time to meet her, nervous, scared of family, but let's take the risk.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Bus </div>
+                    <h3>Left train and took bus </h3>
+                    <center><img src="pic12.jpg" alt="Bus" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Is it fun? Yes, it is. Can't wait to meet her, just 50 minutes more.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Finally</div>
+                    <h3>She Made Your Day Perfect 🎉</h3>
+                    <center><img src="pic13.jpg" alt="Finally" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Finally, the wait is over, hugging her, feeling her body heat on my skin. The taste you have, it was perfect, a perfect date even imagined in my life.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">First Kiss</div>
+                    <h3>First meet first kiss </h3>
+                    <center><img src="pic143.jpg" alt="First Kiss" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>I know you don't remember it, but remember each and everything, and that day was the best day of my life.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Movie Date</div>
+                    <h3>Cozy Movie Together 🍿</h3>
+                    <center><img src="pic15.jpg" alt="Movie Date" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Did we even see the movie? But you came all the way just to meet me for just 4 hours. But it was fun. I know you love me more than I can ever know, but I love you more still. Na na yrr, I miss you.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">My Birthday</div>
+                    <h3>The only good thing that happened</h3>
+                    <center><img src="pic 16.jpg" alt="My Birthday" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Puchi did a lot for me in few months. I love you. You are the only reason I can say I have celebrated my bday with you. You took too much risk for me, and I can never do something you did for me. Thank you Puchi, I love you.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">kissing you </div>
+                    <h3>hugging you </h3>
+                    <center><img src="pic17.jpg" alt="kissing you" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>These are the few things I will never be bored of. I am sorry Puchi, I didn't even realize I made you feel so much pain. I love you, we will meet soon.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Gifts </div>
+                    <h3>The Gifts you give me are something </h3>
+                    <center><img src="pic 18.jpg" alt="Gifts" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>Those gifts are something. I love them so so much, I can't tell. Thank you Puchi so so much. I love you, each and every gift is like closest to my heart.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Best gift of my life </div>
+                    <h3>Unexpected Romance 🎁</h3>
+                    <center><img src="pic 19.jpg" alt="Best gift of my life" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);" /></center>
+                    <p>I wanna say Puchi, thank you for being the part of my life. It's not because of today, I was making this website from a long time. Today I completed it for fun. I recalled all my life in it with you, and I am planning of making website permanent where I can write about my feelings.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">All time Calling each other</div>
+                    <h3>Like don't wanna be far ways from you</h3>
+                    <center><img src="pic 20.jpg" /></center>
+                    <p>A beautiful memory we cherish together.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Skin care </div>
+                    <h3>First time Skin Care</h3>
+                    <center><video controls width="100%"><source src="video1.mp4" type="video/mp4">Your browser does not support the video tag.</video></center>
+                    <p>I Remeber how shock i was when you told me i have never done skin care before i was shocked </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Sweet Times</div>
+                    <h3>Missing each other</h3>
+                    <center><img src="pic22.jpg" /></center>
+                    <p>I remeber i you used to cry when i was not with you and just want to be with me i was also felling same say you where but i can't cry</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Happy Days</div>
+                    <h3>Praying for each other </h3>
+                    <center><img src="pic23.jpg" /></center>
+                    <p>I Remenber what you say after comming from mandir i used to ask what you prayed and used to be like we don't tell or it dont come true</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Cherished Moments</div>
+                    <h3>Finalay meetup</h3>
+                    <center><img src="pic24.jpg" /></center>
+                    <p>After months of waiting we finally met up and it was like a dream come true</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Love and Laughter</div>
+                    <h3>finding name in mandhi</h3>
+                    <center><video controls width="100%"><source src="video2.mp4" type="video/mp4">Your browser does not support the video tag.</video></center>
+                    <p>You remeber when i came to you i was finding my name in mandhi it was very difficult</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Forever Together</div>
+                    <h3>Us </h3>
+                    <center><img src="pic26.jpg" /></center>
+                    <p>Forever together in heart and soul My small baby.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Endless Love</div>
+                    <h3>Torchure </h3>
+                    <center><img src="pic27.jpg" /></center>
+                    <p>Jo mer torchure hua tha yaad h mujhe </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Beautiful Journey</div>
+                    <h3>Time to Go </h3>
+                    <center><video controls width="100%"><source src="video.mp4" type="video/mp4">Your browser does not support the video tag.</video></center>
+                    <p>It was very difficult to say bye to you but i had to go and i will be back soon.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Eternal Bond</div>
+                    <h3>Struggle </h3>
+                    <center><img src="pic29.jpg" /></center>
+                    <p>Choosed best gift for you but struggle .</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date"></div>
+                    <h3>Not Imposible</h3>
+                    <center><img src="pic30.jpg" /></center>
+                    <p>Not imposible but stuggle </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Endless Adventures</div>
+                    <h3>Finaly</h3>
+                    <center><img src="pic31.jpg" /></center>
+                    <p>Mujhe nahi lga tha i could have done this but ho gya </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Cherished Memories</div>
+                    <h3>Dead </h3>
+                    <center><img src="pic32.jpg" /></center>
+                    <p>Memories that we hold dear forever.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Treans</div>
+                    <h3>Gemini art</h3>
+                    <center><img src="pic33.jpg" /></center>
+                    <p>Moments that make our love story unforgettable. Doing random shit just to feel we are together </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="date">Forever Yours</div>
+                    <h3>Ring</h3>
+                    <center><img src="pic34.jpg" /></center>
+                    <p>Forever yours, in every heartbeat. It just feel we are engaged </p>
+                </div>
+            </div>
+
+            <div class="love-quote">
+                <h2>To My Beautiful Puchiii</h2>
+                <p>Thank you for every laugh, every smile, every moment of joy you bring to my life. I love you more
+                    than words can express. I will try saying on your face, pata nahi but I will try. I love you Puchi and
+                    please don't get angry on seeing it. Bahut time lag gaya banane mein. BYE I LOVE YOU ❤️</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p>Made with 💖 for my Puchi</p>
+                <button class="next-page-btn" onclick="window.location.href='page12.html'">Continue Our Journey ➡️</button>
+            </div>
+        </footer>
+
+        <script>
+            // Create floating hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                document.getElementById('hearts').appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
+
+            // Create hearts periodically
+            setInterval(createHeart, 3000);
+
+            // Smooth scrolling for timeline items
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                observer.observe(item);
+            });
+
+            // Add some interactive elements
+            document.querySelectorAll('.timeline-marker').forEach(marker => {
+                marker.addEventListener('mouseenter', () => {
+                    marker.style.transform = 'translateX(-50%) scale(1.5)';
+                });
+                marker.addEventListener('mouseleave', () => {
+                    marker.style.transform = 'translateX(-50%) scale(1)';
+                });
+            });
+        </script>
+</body>
+
+</html>
